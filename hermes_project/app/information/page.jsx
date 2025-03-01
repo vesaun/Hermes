@@ -81,13 +81,13 @@ export default function InformationPage() {
         </p>
 
         <div className="flex justify-center mt-6 space-x-6">
-          <a href="https://instagram.com/ifc" target="_blank" className="text-blue-900 text-xl font-bold hover:text-blue-700">
+          <a href="https://www.instagram.com/ifconthehill/?hl=en" target="_blank" className="text-blue-900 text-xl font-bold hover:text-blue-700">
             Instagram
           </a>
-          <a href="https://facebook.com/ifc" target="_blank" className="text-blue-900 text-xl font-bold hover:text-blue-700">
+          <a href="https://www.facebook.com/BoulderIFC/" target="_blank" className="text-blue-900 text-xl font-bold hover:text-blue-700">
             Facebook
           </a>
-          <a href="mailto:ifc@example.com" className="text-blue-900 text-xl font-bold hover:text-blue-700">
+          <a href="mailto:rush@coloradoifc.org" className="text-blue-900 text-xl font-bold hover:text-blue-700">
             Email Us
           </a>
         </div>
