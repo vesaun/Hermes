@@ -78,7 +78,7 @@ export default function SignUp() {
                             <div>
                                 <label className="block text-blue-900 font-semibold mb-2">Email</label>
                                 <input
-                                    className={`w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.email ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
+                                    className={`text-black w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.email ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
                                     type="email"
                                     name="email"
                                     placeholder="your.email@university.edu"
@@ -89,7 +89,7 @@ export default function SignUp() {
                             <div>
                                 <label className="block text-blue-900 font-semibold mb-2">First Name</label>
                                 <input
-                                    className={`w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.first_name ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
+                                    className={`text-black w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.first_name ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
                                     type="text"
                                     name="first_name"
                                     placeholder="John Fraternity"
@@ -100,7 +100,7 @@ export default function SignUp() {
                             <div>
                                 <label className="block text-blue-900 font-semibold mb-2">Last Name</label>
                                 <input
-                                    className={`w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.last_name ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
+                                    className={`text-black w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.last_name ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
                                     type="text"
                                     name="last_name"
                                     placeholder="John Fraternity"
@@ -111,7 +111,7 @@ export default function SignUp() {
                             <div>
                                 <label className="block text-blue-900 font-semibold mb-2">GPA</label>
                                 <input
-                                    className={`w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.gpa ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
+                                    className={`text-black w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.gpa ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
                                     type="text"
                                     name="gpa"
                                     placeholder="3.5"
@@ -125,7 +125,7 @@ export default function SignUp() {
                             <div>
                                 <label className="block text-blue-900 font-semibold mb-2">Major</label>
                                 <input
-                                    className={`w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.major ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
+                                    className={`text-black w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.major ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
                                     type="text"
                                     name="major"
                                     placeholder="Business Administration"
@@ -136,7 +136,7 @@ export default function SignUp() {
                             <div>
                                 <label className="block text-blue-900 font-semibold mb-2">Hometown State</label>
                                 <input
-                                    className={`w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.hometown_state ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
+                                    className={`text-black w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.hometown_state ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
                                     type="text"
                                     name="hometown_state"
                                     placeholder="Los Angeles, CA"
@@ -147,7 +147,7 @@ export default function SignUp() {
                             <div>
                                 <label className="block text-blue-900 font-semibold mb-2">Hometown City</label>
                                 <input
-                                    className={`w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.hometown_city ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
+                                    className={`text-black w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.hometown_city ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
                                     type="text"
                                     name="hometown_city"
                                     placeholder="Los Angeles, CA"
@@ -158,7 +158,7 @@ export default function SignUp() {
                             <div>
                                 <label className="block text-blue-900 font-semibold mb-2">Instagram Usernmae</label>
                                 <input
-                                    className={`w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.instagram_handle ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
+                                    className={`text-black w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.instagram_handle ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
                                     type="text"
                                     name="instagram_handle"
                                     placeholder="Los Angeles, CA"
@@ -169,7 +169,7 @@ export default function SignUp() {
                             <div>
                                 <label className="block text-blue-900 font-semibold mb-2">High School</label>
                                 <input
-                                    className={`w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.highschool ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
+                                    className={`text-black w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.highschool ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
                                     type="text"
                                     name="highschool"
                                     placeholder="Lincoln High School"
