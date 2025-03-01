@@ -1,8 +1,17 @@
-"use client";
-import Navbar from "./components/Nav";
+"use client"; // Ensure this is a Client Component
+
+import { useEffect, useState } from "react";
+import Navbar from "./components/Nav"; 
 import Link from "next/link";
 
 export default function HomePage() {
+  const [year, setYear] = useState(null);
+
+  // Fix Hydration Error by setting the current year on the client
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Reusable Navbar Component */}
@@ -20,7 +29,7 @@ export default function HomePage() {
       <section className="container mx-auto px-6 py-10">
         <h3 className="text-3xl font-bold text-center text-blue-900">What is IFC?</h3>
         <p className="text-gray-700 text-lg text-center max-w-3xl mx-auto mt-4">
-          The **Interfraternity Council (IFC)** governs and supports fraternities on campus, ensuring strong brotherhood, leadership, and service. Our platform allows fraternities to manage their events and share important updates with their members.
+          The <strong>Interfraternity Council (IFC)</strong> governs and supports fraternities on campus, ensuring strong brotherhood, leadership, and service. Our platform allows fraternities to manage their events and share important updates with their members.
         </p>
       </section>
 
@@ -35,7 +44,7 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="bg-blue-900 text-white text-center py-4 mt-10">
-        &copy; {new Date().getFullYear()} IFC Fraternity Network. All Rights Reserved.
+        &copy; {year ? year : "Loading..."} IFC Fraternity Network. All Rights Reserved.
       </footer>
     </div>
   );

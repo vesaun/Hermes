@@ -20,7 +20,7 @@ export default function InformationPage() {
           <div>
             <h2 className="text-3xl font-bold text-blue-900">What is IFC on The Hill?</h2>
             <p className="text-gray-700 text-lg mt-4">
-              IFC on The Hill is the governing body for fraternities, ensuring a **safe, supportive, and thriving** Greek community. We promote **brotherhood, leadership, philanthropy, and academic success** among fraternities.
+              IFC on The Hill is the governing body for fraternities, ensuring a <strong>safe, supportive, and thriving</strong> Greek community. We promote <strong>brotherhood, leadership, philanthropy, and academic success</strong> among fraternities.
             </p>
             <p className="text-gray-700 text-lg mt-4">
               Whether you're looking to join a fraternity, organize events, or give back to the community, IFC on The Hill is here to support and guide you.
