@@ -82,6 +82,7 @@ export default function SignUp() {
                                     type="email"
                                     name="email"
                                     placeholder="your.email@university.edu"
+                                    onChange={handleChange}
                                 />
                                 {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                             </div>
@@ -93,6 +94,7 @@ export default function SignUp() {
                                     type="text"
                                     name="first_name"
                                     placeholder="John Fraternity"
+                                    onChange={handleChange}
                                 />
                                 {errors.name && <p className="text-red-500 text-sm mt-1">{errors.first_name}</p>}
                             </div>
@@ -104,6 +106,7 @@ export default function SignUp() {
                                     type="text"
                                     name="last_name"
                                     placeholder="John Fraternity"
+                                    onChange={handleChange}
                                 />
                                 {errors.name && <p className="text-red-500 text-sm mt-1">{errors.last_name}</p>}
                             </div>
@@ -115,6 +118,7 @@ export default function SignUp() {
                                     type="text"
                                     name="gpa"
                                     placeholder="3.5"
+                                    onChange={handleChange}
                                 />
                                 {errors.gpa && <p className="text-red-500 text-sm mt-1">{errors.gpa}</p>}
                             </div>
@@ -129,6 +133,7 @@ export default function SignUp() {
                                     type="text"
                                     name="major"
                                     placeholder="Business Administration"
+                                    onChange={handleChange}
                                 />
                                 {errors.major && <p className="text-red-500 text-sm mt-1">{errors.major}</p>}
                             </div>
@@ -140,6 +145,7 @@ export default function SignUp() {
                                     type="text"
                                     name="hometown_state"
                                     placeholder="Los Angeles, CA"
+                                    onChange={handleChange}
                                 />
                                 {errors.hometown_state && <p className="text-red-500 text-sm mt-1">{errors.hometown_state}</p>}
                             </div>
@@ -151,6 +157,7 @@ export default function SignUp() {
                                     type="text"
                                     name="hometown_city"
                                     placeholder="Los Angeles, CA"
+                                    onChange={handleChange}
                                 />
                                 {errors.hometown_city && <p className="text-red-500 text-sm mt-1">{errors.hometown_city}</p>}
                             </div>
@@ -162,6 +169,7 @@ export default function SignUp() {
                                     type="text"
                                     name="instagram_handle"
                                     placeholder="Los Angeles, CA"
+                                    onChange={handleChange}
                                 />
                                 {errors.instagram_handle && <p className="text-red-500 text-sm mt-1">{errors.instagram_handle}</p>}
                             </div>
@@ -173,6 +181,7 @@ export default function SignUp() {
                                     type="text"
                                     name="highschool"
                                     placeholder="Lincoln High School"
+                                    onChange={handleChange}
                                 />
                                 {errors.highschool && <p className="text-red-500 text-sm mt-1">{errors.highschool}</p>}
                             </div>
@@ -199,7 +208,7 @@ export default function SignUp() {
                             name="fraternity"
                             value={formData.fraternity}
                             onChange={(e) => setFormData({ ...formData, fraternity: e.target.value })}
-                            className="w-full px-4 py-3 bg-gray-100 rounded-xl border-2 border-blue-300 focus:ring-2 focus:ring-blue-500"
+                            className="text-black w-full px-4 py-3 bg-gray-100 rounded-xl border-2 border-blue-300 focus:ring-2 focus:ring-blue-500"
                         >
                             <option value="">-- Choose a Fraternity --</option>
                             <option value="Alpha Phi Alpha">Alpha Phi Alpha</option>
