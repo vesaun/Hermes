@@ -31,15 +31,27 @@ export default function SignUp() {
 
     const validate = () => {
         let tempErrors = {};
-        if (!formData.email) tempErrors.email = "Email is required";
-        else if (!/\S+@\S+\.\S+/.test(formData.email)) tempErrors.email = "Email is invalid";
         
-        if (!formData.password) tempErrors.password = "Password is required";
-        else if (formData.password.length < 6) tempErrors.password = "Password must be at least 6 characters";
+        if (!formData.email) 
+            tempErrors.email = "Email is required";
+        else if (!/\S+@\S+\.\S+/.test(formData.email)) 
+            tempErrors.email = "Email is invalid";
         
-        if (!formData.name) tempErrors.name = "Name is required";
-        if (!formData.hometown) tempErrors.hometown = "Hometown is required";
-        if (!formData.highschool) tempErrors.highschool = "High school is required";
+        // if (!formData.password) 
+        //     tempErrors.password = "Password is required";
+        // else if (formData.password.length < 6) 
+        //     tempErrors.password = "Password must be at least 6 characters";
+        
+        // Check for first and last name
+        if (!formData.first_name || !formData.last_name) 
+            tempErrors.name = "First and last name are required";
+        
+        // Check for hometown details
+        if (!formData.hometown_state || !formData.hometown_city) 
+            tempErrors.hometown = "Hometown is required";
+        
+        if (!formData.highschool) 
+            tempErrors.highschool = "High school is required";
         
         if (formData.gpa && (isNaN(formData.gpa) || formData.gpa < 0 || formData.gpa > 4.0)) {
             tempErrors.gpa = "GPA must be a number between 0 and 4.0";
@@ -48,17 +60,30 @@ export default function SignUp() {
         setErrors(tempErrors);
         return Object.keys(tempErrors).length === 0;
     };
+    
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (validate()) {
-            // Here you would typically send the data to your API
-            console.log("Form submitted:", formData);
-            alert("Sign up successful!");
-            // Redirect to login or dashboard
-            // router.push('/login');
+        if (!validate()) {
+          console.error("Validation errors:", errors);
+          return;
         }
-    };
+        
+        console.log("Payload:", formData);
+      
+        const response = await fetch("http://127.0.0.1:8080/api/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+        const data = await response.json();
+        if (response.ok) {
+          alert(data.message);
+        } else {
+          console.error("Server validation errors:", data.errors);
+        }
+      };
+      
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#1E3A8A] via-[#4338CA] to-[#6366F1] flex items-center justify-center px-4 py-12">
@@ -225,12 +250,12 @@ export default function SignUp() {
                         <div className="col-span-2 mt-4">
                             <button 
                                 type="submit" 
+                                // onClick = {handleSubmit}
                                 className="w-full py-4 bg-yellow-500 text-blue-900 font-bold uppercase tracking-wider rounded-xl hover:bg-yellow-600 transition duration-300 ease-in-out transform hover:scale-105 shadow-lg"
                             >
-                                Save Information
+                                Sign up                               
                             </button>
                         </div>
-
                     </form>
                 </div>
             </div>
