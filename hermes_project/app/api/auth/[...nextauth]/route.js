@@ -32,6 +32,7 @@ const handler = NextAuth({
                 console.error("Error signing in:", error);
                 return false;
             }
+            
         },
         async session({ session }) {
             const dbUser = await query("SELECT * FROM users WHERE email = ?", [session.user.email]);
