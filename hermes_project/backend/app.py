@@ -168,6 +168,42 @@ def getUserData():
         })
 
     return jsonify(user_data)
+def add_or_update_user(data):
+    users_ref = db.collection("users")
+    existing_users = list(users_ref.where("email", "==", data["email"]).limit(1).get())
+
+    if existing_users:
+        # Update the existing document
+        doc_id = existing_users[0].id
+        users_ref.document(doc_id).update({
+            "firstname": data["first_name"],
+            "lastname": data["last_name"],
+            "hometown_state": data["hometown_state"],
+            "hometown_city": data["hometown_city"],
+            "instagram_username": data["instagram_handle"],
+            "major": data["major"],
+            "active": data["is_active"],
+            "fraternity": data["fraternity"],
+            "highschool": data["highschool"],
+            "gpa": data["gpa"]
+        })
+        return {"success": "User updated successfully."}
+    else:
+        # Add new user
+        users_ref.add({
+            "email": data["email"],
+            "firstname": data["first_name"],
+            "lastname": data["last_name"],
+            "hometown_state": data["hometown_state"],
+            "hometown_city": data["hometown_city"],
+            "instagram_username": data["instagram_handle"],
+            "major": data["major"],
+            "active": data["is_active"],
+            "fraternity": data["fraternity"],
+            "highschool": data["highschool"],
+            "gpa": data["gpa"]
+        })
+        return {"success": "User added successfully."}
 
 def add_user(data):
     existing_user_ref = db.collection("users").where("email", "==", data["email"]).limit(1).get()
@@ -259,7 +295,7 @@ def signup():
     # In a production scenario, you'd save the data to a database,
     # hash the password, and perform any additional business logic.
     print("Form submitted:", data)
-    result = add_user(data)
+    result = add_or_update_user(data)
     if "error" in result:
         return result, 400
     else:
