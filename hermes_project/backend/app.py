@@ -13,7 +13,7 @@ import re
 app = Flask(__name__)
 CORS(app)
 
-cred = credentials.Certificate("/Users/vesaunshrestha/Documents/Hermes/hermes_project/hackcu-452419-firebase-adminsdk-fbsvc-93c42f86ce.json")
+cred = credentials.Certificate("/Users/logan/OneDrive/Desktop/hackcu/Hermes/hermes_project/hackcu-452419-firebase-adminsdk-fbsvc-93c42f86ce.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
@@ -24,6 +24,7 @@ def getUserData():
     users = users_ref.stream()
 
     user_data = []
+
     for user in users:
         user_dict = user.to_dict()
         user_data.append({
