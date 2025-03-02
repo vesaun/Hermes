@@ -1,6 +1,7 @@
 'use client';
-import { useState } from 'react';
 import Link from 'next/link';
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 export default function UserHomepage() {
     const [activeTab, setActiveTab] = useState('events');
@@ -13,6 +14,8 @@ export default function UserHomepage() {
                 return <ExploreFraternitiesTab />;
             case 'account':
                 return <AccountInformationTab />;
+            case 'calendar':
+                return <Calendar />;
             default:
                 return <EventsTab />;
         }
@@ -30,7 +33,7 @@ export default function UserHomepage() {
                             <h1 className="text-4xl font-extrabold text-white tracking-wider">HERMES</h1>
                         </div>
                         <div className="flex space-x-6">
-                            {['events', 'explore', 'account'].map((tab) => (
+                            {['events', 'explore', 'account', 'calendar'].map((tab) => (
                                 <button
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
@@ -61,7 +64,7 @@ export default function UserHomepage() {
 }
 
 function EventsTab() {
-    return (
+    /*return (
         <div className="space-y-6">
             <h2 className="text-4xl font-bold text-blue-300 mb-6">Upcoming Events</h2>
             {[1, 2, 3].map((event) => (
@@ -84,7 +87,84 @@ function EventsTab() {
                 </div>
             ))}
         </div>
-    );
+    );*/
+    const { data: session, status } = useSession();
+  const [parsedEvents, setParsedEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (status !== 'loading' && session) {
+      // Get the access token and the user's email from the session
+      const accessToken = session.accessToken;
+      const userEmail = session.user.email;
+      const timeMin = new Date().toISOString();
+
+      // Build the URL for fetching events from the primary calendar
+      const url = `https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=${timeMin}&singleEvents=true&orderBy=startTime`;
+
+      fetch(url, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log('All fetched events:', data.items);
+
+          // Parse events: filter to include events where the user is an attendee (accepted) or the creator
+          const myEvents = (data.items || []).filter((event) => {
+            const isAttendee =
+              event.attendees &&
+              event.attendees.some(
+                (attendee) =>
+                  attendee.email === userEmail &&
+                  attendee.responseStatus === 'accepted'
+              );
+            const isCreator =
+              event.creator && event.creator.email === userEmail;
+            return isAttendee || isCreator;
+          });
+
+          console.log('Parsed events (signed up for):', myEvents);
+          setParsedEvents(myEvents);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error fetching events:', error);
+          setLoading(false);
+        });
+    }
+  }, [session, status]);
+
+  if (status === 'loading' || loading) return <p>Loading events...</p>;
+  if (!session) return <p>You are not signed in.</p>;
+
+  return (
+    <div>
+      <h2>My Registered Events</h2>
+      {parsedEvents.length > 0 ? (
+        <ul>
+          {parsedEvents.map((event) => (
+            <li key={event.id} style={{ marginBottom: '1rem' }}>
+              <h3>{event.summary || 'No Title'}</h3>
+              <p>
+                <strong>Start:</strong>{' '}
+                {new Date(event.start.dateTime || event.start.date).toLocaleString()}
+              </p>
+              <p>
+                <strong>End:</strong>{' '}
+                {new Date(event.end.dateTime || event.end.date).toLocaleString()}
+              </p>
+              {event.location && <p><strong>Location:</strong> {event.location}</p>}
+              {event.description && <p><strong>Description:</strong> {event.description}</p>}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No events found that you're registered for.</p>
+      )}
+    </div>
+  );
 }
 
 function ExploreFraternitiesTab() { 
@@ -96,11 +176,64 @@ function ExploreFraternitiesTab() {
     );
 }
 
-function AccountInformationTab() { 
+/*function AccountInformationTab() { 
     return (
         <div className="text-blue-200">
             <h2 className="text-4xl font-bold mb-6">Account Settings</h2>
             <p>Manage your profile and preferences.</p>
         </div>
     );
-}
+}*/
+function AccountInformationTab() {
+    const { data: session, status } = useSession();
+  
+    if (status === "loading") {
+      return <p>Loading session...</p>;
+    }
+  
+    if (!session) {
+      return <p>You are not signed in.</p>;
+    }
+  
+    return (
+      <div className="text-blue-200">
+        <h2 className="text-4xl font-bold mb-6">Account Settings</h2>
+        <p>Welcome, {session.user.name}!</p>
+        <p>Your email is: {session.user.email}</p>
+        {/* You can add more account-related info here */}
+      </div>
+    );
+  }
+
+        function Calendar() {
+            const { data: session, status } = useSession();
+          
+            if (status === "loading") {
+              return <p>Loading session...</p>;
+            }
+          
+            if (!session) {
+              return <p>You are not signed in.</p>;
+            }
+          
+            // Retrieve the user's local timezone from the browser
+            const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          
+            // Build the embed URL using the user's email and timezone
+            const calendarUrl = `https://calendar.google.com/calendar/embed?src=${encodeURIComponent(
+              session.user.email
+            )}&ctz=${encodeURIComponent(userTimeZone)}`;
+          
+            return (
+              <iframe
+                src={calendarUrl}
+                style={{ border: 0, width: "100%", height: "600px" }}
+                frameBorder="0"
+                scrolling="no"
+                title="Google Calendar"
+              />
+            );
+          }
+
+
+//export default Calendar;
