@@ -181,4 +181,325 @@ function ExploreFraternitiesTab() {
             <p>Manage your profile and preferences.</p>
         </div>
     );
-}
+}*/
+function AccountInformationTab() {
+    const { data: session, status } = useSession();
+  
+    if (status === "loading") {
+      return <p>Loading session...</p>;
+    }
+  
+    if (!session) {
+      return <p>You are not signed in.</p>;
+    }
+  
+    return (
+      <div className="text-blue-200">
+        <h2 className="text-4xl font-bold mb-6">Account Settings</h2>
+        <p>Welcome, {session.user.name}!</p>
+        <p>Your email is: {session.user.email}</p>
+        {/* You can add more account-related info here */}
+      </div>
+    );
+  }
+
+/*function Calendar() {
+    const [events, setEvents] = useState([]);
+    const [isSignedIn, setIsSignedIn] = useState(false);
+
+    useEffect(() => {
+        function start() {
+            gapi.client
+                .init({
+                    apiKey: API_KEY,
+                    clientId: CLIENT_ID,
+                    scope: SCOPES,
+                    discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+                })
+                .then(() => {
+                    const authInstance = gapi.auth2.getAuthInstance();
+                    setIsSignedIn(authInstance.isSignedIn.get());
+
+                    if (authInstance.isSignedIn.get()) {
+                        console.log("User is signed in.");
+                        fetchEvents();
+                    } else {
+                        console.log("User needs to sign in.");
+                    }
+                })
+                .catch((error) => console.error("Error initializing Google API:", error));
+        }
+
+        gapi.load("client:auth2", start);
+    }, []);
+
+    function handleLogin() {
+        const authInstance = gapi.auth2.getAuthInstance();
+        authInstance.signIn().then(() => {
+            console.log("User logged in.");
+            fetchEvents();
+        });
+    }
+
+    function handleLogout() {
+        const authInstance = gapi.auth2.getAuthInstance();
+        authInstance.signOut();
+        setEvents([]);
+        setIsSignedIn(false);
+    }
+
+    function fetchEvents() {
+        if (!window.gapi || !window.gapi.client) {
+            console.error("Google API client is not loaded yet.");
+            return;
+        }
+    
+        const authInstance = gapi.auth2.getAuthInstance();
+        if (!authInstance.isSignedIn.get()) {
+            console.error("User is not signed in.");
+            return;
+        }
+    
+        const user = authInstance.currentUser.get();
+        const token = user.getAuthResponse().access_token;
+        console.log("OAuth Token:", token);
+    
+        gapi.client.calendar.events
+            .list({
+                calendarId: "primary",
+                timeMin: new Date().toISOString(),
+                showDeleted: false,
+                singleEvents: true,
+                maxResults: 10,
+                orderBy: "startTime",
+            })
+            .then((response) => {
+                console.log("Events fetched:", response);
+                setEvents(response.result.items || []);
+            })
+            .catch((error) => {
+                console.error("Google API Error:", error);
+            });
+    }
+    
+
+    return (
+        <div className="p-6 max-w-lg mx-auto bg-[#1E293B] shadow-md rounded-lg">
+            <h2 className="text-4xl font-bold text-blue-300 mb-6">Google Calendar Events</h2>
+
+            {!isSignedIn ? (
+                <button
+                    onClick={handleLogin}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-700 transition-all"
+                >
+                    Sign in with Google
+                </button>
+            ) : (
+                <>
+                    <button
+                        onClick={handleLogout}
+                        className="bg-red-500 text-white px-4 py-2 rounded-lg w-full hover:bg-red-600 transition-all"
+                    >
+                        Sign Out
+                    </button>
+                    <ul className="mt-6 space-y-4">
+                        {events.length > 0 ? (
+                            events.map((event) => (
+                                <li key={event.id} className="p-4 bg-[#0F172A] rounded-lg border border-blue-900">
+                                    <strong className="text-blue-200">{event.summary}</strong>
+                                    <p className="text-blue-400 text-sm">
+                                        {new Date(event.start.dateTime || event.start.date).toLocaleString()}
+                                    </p>
+                                </li>
+                            ))
+                        ) : (
+                            <p className="text-blue-500">No upcoming events found.</p>
+                        )}
+                    </ul>
+                </>
+            )}
+        </div>
+    );
+}*/
+/*function Calendar() {
+    
+    return (
+        <iframe
+            src="https://calendar.google.com/calendar/embed"
+            style={{ border: 0, width: "800px", height: "600px" }}
+            frameBorder="0"
+            scrolling="no"
+        />
+    );
+}*/
+/*function Calendar() {
+    const [calendarUrl, setCalendarUrl] = useState("");
+  
+    useEffect(() => {
+      function loadGapiAndInit() {
+        if (!window.gapi) return;
+        window.gapi.load("client:auth2", () => {
+          window.gapi.client
+            .init({
+              apiKey: API_KEY,
+              clientId: CLIENT_ID,
+              scope: SCOPES,
+              discoveryDocs: [
+                "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+              ],
+            })
+            .then(() => {
+              const authInstance = window.gapi.auth2.getAuthInstance();
+              if (authInstance.isSignedIn.get()) {
+                const user = authInstance.currentUser.get();
+                const email = user.getBasicProfile().getEmail();
+                // Build the embed URL using the user's email as the calendar ID.
+                setCalendarUrl(
+                  `https://calendar.google.com/calendar/embed?src=${encodeURIComponent(
+                    email
+                  )}&ctz=America/New_York`
+                );
+              } else {
+                // Optionally, you can force sign-in here.
+                authInstance.signIn().then(() => {
+                  const user = authInstance.currentUser.get();
+                  const email = user.getBasicProfile().getEmail();
+                  setCalendarUrl(
+                    `https://calendar.google.com/calendar/embed?src=${encodeURIComponent(
+                      email
+                    )}&ctz=America/New_York`
+                  );
+                });
+              }
+            })
+            .catch((error) => console.error("Error initializing GAPI:", error));
+        });
+      }
+  
+      // Load the gapi script if not already loaded.
+      if (!window.gapi) {
+        const script = document.createElement("script");
+        script.src = "https://apis.google.com/js/api.js";
+        script.async = true;
+        script.onload = loadGapiAndInit;
+        document.body.appendChild(script);
+      } else {
+        loadGapiAndInit();
+      }
+    }, []);
+  
+    return (
+      <div>
+        {calendarUrl ? (
+          <iframe
+            src={calendarUrl}
+            style={{ border: 0, width: "800px", height: "600px" }}
+            frameBorder="0"
+            scrolling="no"
+          />
+        ) : (
+          <p>Loading calendar...</p>
+        )}
+      </div>
+    );
+  }*/
+    /*function Calendar() {
+        const [calendarUrl, setCalendarUrl] = useState('');
+      
+        useEffect(() => {
+          function initializeGapi() {
+            // Load the client:auth2 modules, then initialize with your credentials
+            gapi.load('client:auth2', async () => {
+              try {
+                await gapi.client.init({
+                  apiKey: API_KEY,
+                  clientId: CLIENT_ID,
+                  scope: SCOPES,
+                  discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
+                });
+        
+                const authInstance = gapi.auth2.getAuthInstance();
+                // Check if user is already signed in
+                if (authInstance.isSignedIn.get()) {
+                  const user = authInstance.currentUser.get();
+                  const email = user.getBasicProfile().getEmail();
+                  // Build the embed URL with the user's email
+                  setCalendarUrl(
+                    `https://calendar.google.com/calendar/embed?src=${encodeURIComponent(email)}&ctz=America/New_York`
+                  );
+                } else {
+                  // Optionally, force sign-in if not already signed in
+                  authInstance.signIn().then(() => {
+                    const user = authInstance.currentUser.get();
+                    const email = user.getBasicProfile().getEmail();
+                    setCalendarUrl(
+                      `https://calendar.google.com/calendar/embed?src=${encodeURIComponent(email)}&ctz=America/New_York`
+                    );
+                  });
+                }
+              } catch (error) {
+                console.error('Error initializing GAPI:', error);
+              }
+            });
+          }
+        
+          // Dynamically load the gapi script if not already loaded
+          if (!window.gapi) {
+            const script = document.createElement('script');
+            script.src = 'https://apis.google.com/js/api.js';
+            script.async = true;
+            script.onload = initializeGapi;
+            document.body.appendChild(script);
+          } else {
+            initializeGapi();
+          }
+        }, []);
+        
+        return (
+          <div>
+            {calendarUrl ? (
+              <iframe
+                src={calendarUrl}
+                style={{ border: 0, width: "100%", height: "600px" }}
+                frameBorder="0"
+                scrolling="no"
+                title="Google Calendar"
+              />
+            ) : (
+              <p>Loading calendar...</p>
+            )}
+          </div>
+        );
+      }*/
+        function Calendar() {
+            const { data: session, status } = useSession();
+          
+            if (status === "loading") {
+              return <p>Loading session...</p>;
+            }
+          
+            if (!session) {
+              return <p>You are not signed in.</p>;
+            }
+          
+            // Retrieve the user's local timezone from the browser
+            const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          
+            // Build the embed URL using the user's email and timezone
+            const calendarUrl = `https://calendar.google.com/calendar/embed?src=${encodeURIComponent(
+              session.user.email
+            )}&ctz=${encodeURIComponent(userTimeZone)}`;
+          
+            return (
+              <iframe
+                src={calendarUrl}
+                style={{ border: 0, width: "100%", height: "600px" }}
+                frameBorder="0"
+                scrolling="no"
+                title="Google Calendar"
+              />
+            );
+          }
+
+
+//export default Calendar;
