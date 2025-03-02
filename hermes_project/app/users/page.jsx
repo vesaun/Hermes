@@ -26,8 +26,9 @@ export default function UsersPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-5 transition-all">
-      <h1 className="text-3xl font-bold mb-6 text-black">Users List</h1>
+    // <div className="min-h-screen bg-gray-100 flex flex-col items-center p-5 transition-all">
+    <div className="min-h-screen bg-gradient-to-b from-blue-200 to-white flex flex-col items-center p-5 transition-all">
+      {/* <h1 className="text-3xl font-bold mb-6 text-black">Users List</h1> */}
 
       {loading ? (
         <p>Loading users...</p>
