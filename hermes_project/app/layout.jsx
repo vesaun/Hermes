@@ -1,6 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SessionProvider from "./components/SessionProvider";
+import Head from "next/head";
+import AOSInitializer from "./aosinit"; // adjust the path as needed
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,10 +22,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+        />
+      </Head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SessionProvider>
+          {/* AOSInitializer is a client component */}
+          <AOSInitializer />
           {children}
         </SessionProvider>
       </body>
