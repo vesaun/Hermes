@@ -91,6 +91,28 @@ body {
   background-color: #e5e7eb; /* light gray */
 }
 
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--primary-text);
+}
+
+.nav-link .link-text {
+  opacity: 0;
+  max-width: 0;
+  margin-left: 0;
+  transform: translateX(0 px);
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-width 0.7s ease, margin 0.5s ease, transform 2s ease;
+}
+
+.nav-link:hover .link-text {
+  opacity: 1;
+  max-width: 200px; /* Adjust based on the expected text width */
+  margin-left: 10px; /* Adjust as needed */
+  transform: translateX(0);
+}
 /* Mobile Menu (if applicable) */
 .mobile-menu {
   background-color: var(--primary-bg); /* a slightly different blue */
