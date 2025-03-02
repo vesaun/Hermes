@@ -28,14 +28,14 @@ export default function Navbar() {
           ) : (
             <div className="flex gap-4">
               <button
-                onClick={() => signIn("google", { callbackUrl: "/" })}
-                className="auth-btn"
+                onClick={() => signIn("google", { callbackUrl: "/signup" })}
+                className="bg-white text-blue-900 px-4 py-2 rounded-lg hover:bg-gray-200 cursor-pointer"
               >
                 Register
               </button>
               <button
-                onClick={() => signIn("google", { callbackUrl: "/" })}
-                className="auth-btn"
+                onClick={() => signIn("google", { callbackUrl: "/user_homepage" })}
+                className="bg-white text-blue-900 px-4 py-2 rounded-lg hover:bg-gray-200 cursor-pointer"
               >
                 Log In
               </button>
