@@ -18,12 +18,20 @@ export default function HomePage() {
       <Navbar />
 
       {/* Hero Section */}
-      <header className="text-center py-20 bg-blue-800 text-white">
-        <h2 className="text-4xl font-bold">Welcome to the IFC Fraternity Network</h2>
-        <p className="text-lg mt-4 max-w-2xl mx-auto">
-          A centralized platform for fraternities to post events, share updates, and connect with the community.
-        </p>
-      </header>
+      <header
+  className="relative flex items-center justify-center bg-cover bg-center bg-no-repeat min-h-screen"
+  style={{ backgroundImage: "url('/images/Flatirons_Winter_Sunrise_edit_2.jpg')" }}
+>
+  {/* Dark Overlay for Contrast */}
+  <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+
+  {/* Huge & Bold Stretched Welcome Text */}
+  <h1 className="relative z-10 text-white text-8xl font-black tracking-[0.2em] scale-x-125 whitespace-nowrap shadow-[0_0_25px_rgba(255,255,255,1)]">
+    Welcome to Hermes
+  </h1>
+</header>
+
+
 
       {/* Main Content */}
       <section className="container mx-auto px-6 py-10">

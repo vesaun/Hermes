@@ -15,26 +15,32 @@ export default function InformationPage() {
       </header>
 
       {/* Section: About IFC on The Hill */}
-      <section className="container mx-auto px-6 py-12">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h2 className="text-3xl font-bold text-blue-900">What is IFC on The Hill?</h2>
-            <p className="text-gray-700 text-lg mt-4">
-              IFC on The Hill is the governing body for fraternities, ensuring a <strong>safe, supportive, and thriving</strong> Greek community. We promote <strong>brotherhood, leadership, philanthropy, and academic success</strong> among fraternities.
-            </p>
-            <p className="text-gray-700 text-lg mt-4">
-              Whether you're looking to join a fraternity, organize events, or give back to the community, IFC on The Hill is here to support and guide you.
-            </p>
-          </div>
-          {/*<Image
-            src="/ifc-hill.jpg" // Replace with actual image file in public/
-            alt="IFC on The Hill"
-            width={500}
-            height={300}
-            className="rounded-lg shadow-md"
-          />*/}
-        </div>
-      </section>
+      <section className="container mx-auto px-6 py-12 flex flex-col items-center text-center">
+  <div className="max-w-3xl">
+    <h2 className="text-3xl font-bold text-blue-900">What is IFC on The Hill?</h2>
+    <p className="text-gray-700 text-lg mt-4">
+      IFC on The Hill is the governing body for fraternities, ensuring a 
+      <strong> safe, supportive, and thriving </strong> Greek community. 
+      We promote <strong> brotherhood, leadership, philanthropy, and academic success </strong> among fraternities.
+    </p>
+    <p className="text-gray-700 text-lg mt-4">
+      Whether you're looking to join a fraternity, organize events, or give back to the community, IFC on The Hill is here to support and guide you.
+    </p>
+  </div>
+
+  {/* Centering the Image Below the Text */}
+  {/* Uncomment if needed */}
+  {/* <div className="mt-6">
+    <Image
+      src="/ifc-hill.jpg" // Replace with actual image file in public/
+      alt="IFC on The Hill"
+      width={500}
+      height={300}
+      className="rounded-lg shadow-md mx-auto"
+    />
+  </div> */}
+</section>
+
 
       {/* Section: How to Get Involved */}
       <section className="bg-blue-100 py-12">
@@ -75,13 +81,13 @@ export default function InformationPage() {
         </p>
 
         <div className="flex justify-center mt-6 space-x-6">
-          <a href="https://instagram.com/ifc" target="_blank" className="text-blue-900 text-xl font-bold hover:text-blue-700">
+          <a href="https://www.instagram.com/ifconthehill/?hl=en" target="_blank" className="text-blue-900 text-xl font-bold hover:text-blue-700">
             Instagram
           </a>
-          <a href="https://facebook.com/ifc" target="_blank" className="text-blue-900 text-xl font-bold hover:text-blue-700">
+          <a href="https://www.facebook.com/BoulderIFC/" target="_blank" className="text-blue-900 text-xl font-bold hover:text-blue-700">
             Facebook
           </a>
-          <a href="mailto:ifc@example.com" className="text-blue-900 text-xl font-bold hover:text-blue-700">
+          <a href="mailto:rush@coloradoifc.org" className="text-blue-900 text-xl font-bold hover:text-blue-700">
             Email Us
           </a>
         </div>
