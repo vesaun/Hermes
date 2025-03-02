@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import UserCard from "../components/UserCard";
 import UserModal from "../components/UserModal";
-
+import Navbar from "../components/Nav";
+import Footer from "../components/footer";
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,9 @@ export default function UsersPage() {
   }, []);
 
   return (
+    <>
+    <Navbar />
+
     <div className="min-h-screen bg-gray-100 flex flex-col items-center p-5 transition-all">
       <h1 className="text-3xl font-bold mb-6 text-black">Users List</h1>
 
@@ -42,6 +46,10 @@ export default function UsersPage() {
       {/* Show modal if a user is selected */}
       {selectedUser && <UserModal user={selectedUser} onClose={() => setSelectedUser(null)} />}
     </div>
+    <Footer />
+
+    </>
+
   );
 }
 
