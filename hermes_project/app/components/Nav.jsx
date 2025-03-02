@@ -35,13 +35,13 @@ export default function Navbar() {
             // If the user is NOT logged in, show both Register and Log In buttons
             <div className="flex space-x-4">
               <button
-                onClick={() => signIn("google", { callbackUrl: "/" })}
+                onClick={() => signIn("google", { callbackUrl: "/signup" })}
                 className="bg-white text-blue-900 px-4 py-2 rounded-lg hover:bg-gray-200 cursor-pointer"
               >
                 Register
               </button>
               <button
-                onClick={() => signIn("google", { callbackUrl: "/" })}
+                onClick={() => signIn("google", { callbackUrl: "/user_homepage" })}
                 className="bg-white text-blue-900 px-4 py-2 rounded-lg hover:bg-gray-200 cursor-pointer"
               >
                 Log In
