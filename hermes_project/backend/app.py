@@ -78,7 +78,9 @@ def add_user(data):
             "instagram_username": data["instagram_handle"],
             "major": data["major"],
             "active": data["is_active"],
-            "fraternity": data["fraternity"]
+            "fraternity": data["fraternity"],
+            "highschool": data["highschool"],
+            "gpa": data["gpa"]
         }
     )
 
