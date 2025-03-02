@@ -160,25 +160,64 @@ function ExploreFraternitiesTab() {
 }
 
 function AccountInformationTab() {
-  const { data: session, status } = useSession();
-
-  if (status === "loading") {
-    return <p className="text-white">Loading session...</p>;
+    const { data: session, status } = useSession();
+    const [userData, setUserData] = useState(null);
+    const [error, setError] = useState(null);
+    const [loadingData, setLoadingData] = useState(true);
+  
+    useEffect(() => {
+      if (session && session.user && session.user.email) {
+        async function fetchUserData() {
+          try {
+            const response = await fetch(
+              `http://127.0.0.1:8080/api/findUserData/${session.user.email}`,
+              {
+                method: "GET",
+                headers: { "Content-Type": "application/json" }
+              }
+            );
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            setUserData(data);
+          } catch (err) {
+            console.error("Error fetching user data:", err);
+            setError(err.message);
+          } finally {
+            setLoadingData(false);
+          }
+        }
+        fetchUserData();
+      }
+    }, [session]);
+  
+    if (status === "loading") return <p>Loading session...</p>;
+    if (!session) return <p>You are not signed in.</p>;
+  
+    return (
+      <div className="text-blue-200">
+        <h2 className="text-4xl font-bold mb-6">Account Settings</h2>
+        <p>Welcome, {session.user.name}!</p>
+        <p>Your email is: {session.user.email}</p>
+        
+        {loadingData ? (
+          <p>Loading user data...</p>
+        ) : error ? (
+          <p>Error: {error}</p>
+        ) : userData ? (
+          <div>
+            <h3>User Data:</h3>
+            <pre>{JSON.stringify(userData, null, 2)}</pre>
+          </div>
+        ) : (
+          <p>No user data found.</p>
+        )}
+  
+        {/* You can add more account-related info here */}
+      </div>
+    );
   }
-
-  if (!session) {
-    return <p className="text-white">You are not signed in.</p>;
-  }
-
-  return (
-    <div className="text-blue-200">
-      <h2 className="text-4xl font-bold mb-6">Account Settings</h2>
-      <p>Welcome, {session.user.name}!</p>
-      <p>Your email is: {session.user.email}</p>
-      {/* You can add more account-related info here */}
-    </div>
-  );
-}
 
 function Calendar() {
   const { data: session, status } = useSession();

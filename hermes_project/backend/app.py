@@ -8,6 +8,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import firebase_admin
 from firebase_admin import credentials, firestore
+from dataclasses import dataclass
 import re
 
 app = Flask(__name__)
@@ -18,10 +19,62 @@ CORS(app)
 
 #LOGAN's PATH
 #/Users/logan/OneDrive/Desktop/hackcu/Hermes/hermes_project/hackcu-452419-firebase-adminsdk-fbsvc-93c42f86ce.json
-cred = credentials.Certificate("D:\Yuri\Hackathon\HACKCU2025\Hermes\hermes_project\hackcu-452419-firebase-adminsdk-fbsvc-93c42f86ce.json")
+cred = credentials.Certificate("/Users/vesaunshrestha/Documents/Hermes/hermes_project/hackcu-452419-firebase-adminsdk-fbsvc-93c42f86ce.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
+
+@dataclass
+class UserData:
+    first_name: str
+    last_name: str
+    hometown_city: str
+    hometown_state: str
+    gpa: float
+    instagram_username: str
+    major: str
+    active: bool
+    fraternity: str
+
+def clean_user_data(user_dict):
+    # Create a UserData instance using raw Firestore data.
+    return UserData(
+        first_name=user_dict.get("firstname", ""),
+        last_name=user_dict.get("lastname", ""),
+        hometown_city=user_dict.get("hometown_city", ""),
+        hometown_state=user_dict.get("hometown_state", ""),
+        gpa=float(user_dict.get("gpa", 0.0)),
+        instagram_username=user_dict.get("instagram_username", ""),
+        major=user_dict.get("major", ""),
+        active=user_dict.get("active", False),
+        fraternity=user_dict.get("fraternity", "")
+    )
+
+def to_clean_dict(user_data: UserData):
+    # Convert the UserData instance into a dictionary with keys matching the SQL table.
+    return {
+        "First Name": user_data.first_name,
+        "Last Name": user_data.last_name,
+        "Hometown City": user_data.hometown_city,
+        "Hometown State": user_data.hometown_state,
+        "GPA": user_data.gpa,
+        "Instagram": user_data.instagram_username,
+        "Major": user_data.major,
+        "Active": user_data.active,
+        "Fraternity": user_data.fraternity
+    }
+
+@app.route("/api/findUserData/<email>", methods=["GET"])
+def findUserData(email):
+    users_ref = db.collection("users")
+    query = users_ref.where("email", "==", email).stream()
+
+    user_data_list = [to_clean_dict(clean_user_data(user.to_dict())) for user in query]
+
+    if not user_data_list:
+        return jsonify({"error": "User not found"}), 404
+
+    return jsonify(user_data_list)
 
 @app.route("/api/getFratData", methods=["GET"])
 def getFratData():
