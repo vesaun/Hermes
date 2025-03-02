@@ -87,6 +87,12 @@ export default function Navbar() {
                 {session.active ? "PNMs" : "Fraternities"}
               </span>
             </Link>
+            <Link href="/chat" className="nav-link">
+              <span className="icon">
+                <i className="bi bi-chat-dots"></i>
+              </span>
+              <span className="link-text">Chat</span>
+            </Link>
           </>
         )}
           {/* Auth Buttons */}
