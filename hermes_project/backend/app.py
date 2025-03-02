@@ -11,6 +11,12 @@ from firebase_admin import credentials, firestore
 from dataclasses import dataclass
 import re
 
+
+import numpy as np
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
+import openai
+
 app = Flask(__name__)
 CORS(app)
 #Yuri's PATH
@@ -24,7 +30,11 @@ cred = credentials.Certificate("/Users/logan/OneDrive/Desktop/hackcu/Hermes/herm
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
+# Load the embedding model for text vectorization.
+embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
+# Set up your OpenAI API key.
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 @dataclass
 class UserData:
     first_name: str
@@ -213,6 +223,102 @@ def signup():
         return result, 400
     else:
         return result, 200
+
+
+
+
+
+
+
+
+# ----------------------------
+# New LLM Matchmaking Endpoint
+# ----------------------------
+
+def vectorize_profile(profile_text: str) -> np.ndarray:
+    """Convert profile text into a vector using the embedding model."""
+    return embedding_model.encode(profile_text)
+
+def get_all_user_profiles():
+    """Retrieve all user profiles from Firestore and build an interests string."""
+    users_ref = db.collection("users")
+    users = users_ref.stream()
+    profiles = []
+    for user in users:
+        user_dict = user.to_dict()
+        interests = " ".join([
+            user_dict.get("major", ""),
+            user_dict.get("fraternity", ""),
+            user_dict.get("hometown_city", ""),
+            user_dict.get("hometown_state", "")
+        ])
+        profiles.append({
+            "id": user.id,
+            "firstname": user_dict.get("firstname"),
+            "lastname": user_dict.get("lastname"),
+            "interests_text": interests,
+            "raw": user_dict
+        })
+    return profiles
+
+def find_top_matches(query_vector, profiles, top_k=5):
+    """Find the top k matching profiles using cosine similarity."""
+    profile_vectors = [vectorize_profile(profile["interests_text"]) for profile in profiles]
+    sims = cosine_similarity([query_vector], profile_vectors)[0]
+    top_indices = np.argsort(sims)[::-1][:top_k]
+    top_matches = []
+    for idx in top_indices:
+        top_matches.append({
+            "profile": profiles[idx],
+            "similarity": float(sims[idx])
+        })
+    return top_matches
+
+def generate_match_summary(matches):
+    """
+    Generate a summary description using the new ChatCompletion API.
+    """
+    prompt_lines = ["I found the following 5 users with similar interests:"]
+    for i, match in enumerate(matches, 1):
+        profile = match["profile"]
+        line = f"{i}. {profile['firstname']} {profile['lastname']} - Interests: {profile['interests_text']}"
+        prompt_lines.append(line)
+    prompt_lines.append("\nGenerate a brief summary describing why these users might be a great match based on their profiles.")
+    prompt = "\n".join(prompt_lines)
+
+    messages = [
+        {"role": "system", "content": "You are a helpful matchmaking assistant."},
+        {"role": "user", "content": prompt}
+    ]
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=messages,
+        max_tokens=150,
+        temperature=0.7,
+    )
+    summary = response.choices[0].message.content.strip()
+    return summary
+
+@app.route("/api/findMatches", methods=["POST"])
+def find_matches():
+    """
+    Expects a JSON payload with a "profile" key containing a summary of the user's interests.
+    Returns the top 5 matching profiles and an LLM-generated summary.
+    """
+    data = request.get_json()
+    if not data or "profile" not in data:
+        return jsonify({"error": "Missing 'profile' field in request."}), 400
+
+    query_text = data["profile"]
+    query_vector = vectorize_profile(query_text)
+    profiles = get_all_user_profiles()
+    top_matches = find_top_matches(query_vector, profiles, top_k=9)
+    summary_message = generate_match_summary(top_matches)
+    result = {
+        "top_matches": top_matches,
+        "summary": summary_message
+    }
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
