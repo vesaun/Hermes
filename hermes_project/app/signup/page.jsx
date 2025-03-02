@@ -169,7 +169,7 @@ export default function SignUp() {
                                     className={`text-black w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.hometown_state ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
                                     type="text"
                                     name="hometown_state"
-                                    placeholder="Los Angeles, CA"
+                                    placeholder="California"
                                     onChange={handleChange}
                                 />
                                 {errors.hometown_state && <p className="text-red-500 text-sm mt-1">{errors.hometown_state}</p>}
@@ -181,19 +181,19 @@ export default function SignUp() {
                                     className={`text-black w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.hometown_city ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
                                     type="text"
                                     name="hometown_city"
-                                    placeholder="Los Angeles, CA"
+                                    placeholder="Los Angeles"
                                     onChange={handleChange}
                                 />
                                 {errors.hometown_city && <p className="text-red-500 text-sm mt-1">{errors.hometown_city}</p>}
                             </div>
 
                             <div>
-                                <label className="block text-blue-900 font-semibold mb-2">Instagram Usernmae</label>
+                                <label className="block text-blue-900 font-semibold mb-2">Instagram Username</label>
                                 <input
                                     className={`text-black w-full px-4 py-3 bg-gray-100 rounded-xl border-2 ${errors.instagram_handle ? 'border-red-500' : 'border-blue-300'} focus:ring-2 focus:ring-blue-500`}
                                     type="text"
                                     name="instagram_handle"
-                                    placeholder="Los Angeles, CA"
+                                    placeholder="JohnDoe"
                                     onChange={handleChange}
                                 />
                                 {errors.instagram_handle && <p className="text-red-500 text-sm mt-1">{errors.instagram_handle}</p>}
