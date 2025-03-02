@@ -169,8 +169,6 @@ body {
   letter-spacing: 0.2em;
   transform: scaleX(1.1);
   animation: fadeInDown 0.8s ease-out forwards;
-  -webkit-text-stroke: 1px black; /* Adds a 2px black outline */
-  text-stroke: 1px black; /* For browsers that support unprefixed version */
 }
 
 .hero-subtitle {

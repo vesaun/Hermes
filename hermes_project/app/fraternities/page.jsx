@@ -50,7 +50,8 @@
 import { useEffect, useState } from "react";
 import FratCard from "../components/FratCard";
 import FratModal from "../components/FratModal";
-
+import Navbar from "../components/Nav";
+import Footer from "../components/footer";
 export default function FratsPage() {
   const [frats, setFrats] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -73,23 +74,31 @@ export default function FratsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-5 transition-all">
-      <h1 className="text-3xl font-bold mb-6 text-black">Fraternities List</h1>
+    <>
+      {/* Navbar is outside of the centered container */}
+      <Navbar />
 
-      {loading ? (
-        <p>Loading fraternities...</p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full px-4">
-          {frats.map((frat, index) => ( // FIXED: changed 'user' to 'frat'
-            <FratCard key={index} frat={frat} onMoreInfo={() => setSelectedFrat(frat)} />
-          ))}
-        </div>
-      )}
+      {/* Main container for the page content */}
+      <div className="min-h-screen bg-gray-100 flex flex-col items-center p-5 transition-all">
+        <h1 className="text-3xl font-bold mb-6 text-black">Fraternities List</h1>
+        {loading ? (
+          <p>Loading fraternities...</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full px-4">
+            {frats.map((frat, index) => (
+              <FratCard key={index} frat={frat} onMoreInfo={() => setSelectedFrat(frat)} />
+            ))}
+          </div>
+        )}
 
-      {/* Show modal if a fraternity is selected */}
-      {selectedFrat && <FratModal frat={selectedFrat} onClose={() => setSelectedFrat(null)} />}
-    </div>
+        {selectedFrat && (
+          <FratModal frat={selectedFrat} onClose={() => setSelectedFrat(null)} />
+        )}
+      </div>
+
+      {/* Footer is also outside of the centered container */}
+      <Footer />
+    </>
   );
 }
-
 
