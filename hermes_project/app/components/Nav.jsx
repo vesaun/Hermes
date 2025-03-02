@@ -58,12 +58,6 @@ export default function Navbar() {
               </span>
               <span className="link-text">Events</span>
             </Link>
-            <Link href="/user_homepage?tab=explore" className="nav-link">
-              <span className="icon">
-                <i className="bi bi-compass"></i>
-              </span>
-              <span className="link-text">Explore</span>
-            </Link>
             <Link href="/user_homepage?tab=account" className="nav-link">
               <span className="icon">
                 <i className="bi bi-person"></i>
