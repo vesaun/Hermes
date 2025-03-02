@@ -18,6 +18,23 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
+@app.route("/api/getUserData", methods=["GET"])
+def getUserData():
+    users_ref = db.collection("users")
+    users = users_ref.stream()
+
+    user_data = []
+    for user in users:
+        user_dict = user.to_dict()
+        user_data.append({
+            "firstname": user_dict.get("firstname"),
+            "lastname": user_dict.get("lastname"),
+            "hometown": f"{user_dict.get('hometown_city')}, {user_dict.get('hometown_state')}",
+            "major": user_dict.get("major")
+        })
+
+    return jsonify(user_data)
+
 def add_user(data):
     existing_user_ref = db.collection("users").where("email", "==", data["email"]).limit(1).get()
 
