@@ -10,6 +10,14 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 from dataclasses import dataclass
 import re
+# import pymysql
+
+# Configure your database connection details via environment variables or hard-code (not recommended for production)
+# DB_HOST = os.environ.get("DB_HOST", "localhost")
+# DB_USER = os.environ.get("DB_USER", "your_db_username")
+# DB_PASS = os.environ.get("DB_PASS", "your_db_password")
+# DB_NAME = os.environ.get("DB_NAME", "users_db")
+
 
 
 import numpy as np
@@ -19,6 +27,8 @@ import openai
 
 app = Flask(__name__)
 CORS(app)
+# CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 #Yuri's PATH
 # D:\Yuri\Hackathon\HACKCU2025\Hermes\hermes_project\hackcu-452419-firebase-adminsdk-fbsvc-93c42f86ce.json
 #VESAUN's PATH
@@ -35,6 +45,9 @@ embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 # Set up your OpenAI API key.
 openai.api_key = os.environ.get("OPENAI_API_KEY")
+
+
+
 @dataclass
 class UserData:
     first_name: str
@@ -75,17 +88,44 @@ def to_clean_dict(user_data: UserData):
         "Fraternity": user_data.fraternity
     }
 
+
+
 @app.route("/api/findUserData/<email>", methods=["GET"])
-def findUserData(email):
+def getUserDataByEmail(email):
     users_ref = db.collection("users")
-    query = users_ref.where("email", "==", email).stream()
+    query_results = users_ref.where("email", "==", email).stream()
 
-    user_data_list = [to_clean_dict(clean_user_data(user.to_dict())) for user in query]
+    user_data = []
+    for user in query_results:
+        user_dict = user.to_dict()
+        user_data.append({
+            "firstname": user_dict.get("firstname"),
+            "lastname": user_dict.get("lastname"),
+            "hometown": f"{user_dict.get('hometown_city')}, {user_dict.get('hometown_state')}",
+            "major": user_dict.get("major"),
+            "highschool": user_dict.get("highschool"),
+            "gpa": user_dict.get("gpa"),
+            # "email": user_dict.get("email"),
+            "active": user_dict.get("active"),
+        })
 
-    if not user_data_list:
+    if not user_data:
         return jsonify({"error": "User not found"}), 404
 
-    return jsonify(user_data_list)
+    return jsonify(user_data[0])
+
+
+# @app.route("/api/findUserData/<email>", methods=["GET"])
+# def findUserData(email):
+#     users_ref = db.collection("users")
+#     query = users_ref.where("email", "==", email).stream()
+
+#     user_data_list = [to_clean_dict(clean_user_data(user.to_dict())) for user in query]
+
+#     if not user_data_list:
+#         return jsonify({"error": "User not found"}), 404
+
+#     return jsonify(user_data_list)
 
 @app.route("/api/getFratData", methods=["GET"])
 def getFratData():
@@ -107,6 +147,7 @@ def getFratData():
         })
 
     return jsonify(frat_data)
+
 
 @app.route("/api/getUserData", methods=["GET"])
 def getUserData():
