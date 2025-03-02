@@ -13,10 +13,34 @@ import re
 app = Flask(__name__)
 CORS(app)
 
+#VESAUN's PATH
+#/Users/vesaunshrestha/Documents/Hermes/hermes_project/hackcu-452419-firebase-adminsdk-fbsvc-93c42f86ce.json
+
+#LOGAN's PATH
+#/Users/logan/OneDrive/Desktop/hackcu/Hermes/hermes_project/hackcu-452419-firebase-adminsdk-fbsvc-93c42f86ce.json
 cred = credentials.Certificate("/Users/vesaunshrestha/Documents/Hermes/hermes_project/hackcu-452419-firebase-adminsdk-fbsvc-93c42f86ce.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
+
+@app.route("/api/getFratData", methods=["GET"])
+def getFratData():
+    frats_ref = db.collection("fraternities")
+    frats = frats_ref.stream()
+
+    frat_data = []
+    for frat in frats:
+        frat_dict = frat.to_dict()
+        frat_data.append({
+            "name": frat_dict.get("name"),
+            "chapter": frat_dict.get("chapter"),
+            "address": frat_dict.get("address"),
+            "year_founded": frat_dict.get("year_founded"),
+            "member_count": frat_dict.get("member_count"),
+            "instagram_username": frat_dict.get("instagram_username")
+        })
+
+    return jsonify(frat_data)
 
 @app.route("/api/getUserData", methods=["GET"])
 def getUserData():
@@ -24,6 +48,7 @@ def getUserData():
     users = users_ref.stream()
 
     user_data = []
+
     for user in users:
         user_dict = user.to_dict()
         user_data.append({
@@ -53,7 +78,9 @@ def add_user(data):
             "instagram_username": data["instagram_handle"],
             "major": data["major"],
             "active": data["is_active"],
-            "fraternity": data["fraternity"]
+            "fraternity": data["fraternity"],
+            "highschool": data["highschool"],
+            "gpa": data["gpa"]
         }
     )
 
