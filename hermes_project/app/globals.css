@@ -10,6 +10,8 @@
   --background: #ffffff;
   --foreground: #171717;
   --primary-text: black;
+
+  --primary-bg: #ffffff;    /* Deep blue background */
   
 }
 
@@ -17,6 +19,7 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
   }
 }
 
@@ -50,7 +53,7 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
-
+  color: black;
 }
 
 .nav .nav-links {
@@ -62,19 +65,19 @@ body {
 
 .nav .nav-link {
   text-decoration: none;
-  color: black;
+  color: var(--primary-text);
   -webkit-text-stroke: 0.01px black; /* Adds a 2px black outline */
   text-stroke: 0.01px black; /* For browsers that support unprefixed version */
 }
 
 .nav .nav-link:hover {
-  color: black;
+  opacity: 0.8;
   
 }
 
 .nav .auth-btn,
 .nav .sign-out {
-  background-color: #ffffff;
+  background-color: var(--primary-text);
   color: var(--primary-bg);
   border: none;
   padding: 0.5rem 1rem;
@@ -90,7 +93,7 @@ body {
 
 /* Mobile Menu (if applicable) */
 .mobile-menu {
-  background-color: #1e40af; /* a slightly different blue */
+  background-color: var(--primary-bg); /* a slightly different blue */
   text-align: center;
   padding: 1rem;
 }
@@ -105,7 +108,8 @@ body {
 
 .mobile-menu a:hover,
 .mobile-menu button:hover {
-  color: #ccc;
+
+  opacity: 0.8;
 }
 
 
