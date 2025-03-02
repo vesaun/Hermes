@@ -27,10 +27,9 @@ export default function UsersPage() {
   }, []);
 
   return (
-    // <div className="min-h-screen bg-gray-100 flex flex-col items-center p-5 transition-all">
-      {/* <h1 className="text-3xl font-bold mb-6 text-black">Users List</h1> */}
+    <>
     <Navbar />
-
+    {/* <div className="min-h-screen bg-gray-100 flex flex-col items-center p-5 transition-all"> */}
     <div className="min-h-screen bg-gradient-to-b from-blue-200 to-white flex flex-col items-center p-5 transition-all">
       <h1 className="text-3xl font-bold mb-6 text-black">Users List</h1>
       {loading ? (
@@ -47,9 +46,7 @@ export default function UsersPage() {
       {selectedUser && <UserModal user={selectedUser} onClose={() => setSelectedUser(null)} />}
     </div>
     <Footer />
-
     </>
-
   );
 }
 

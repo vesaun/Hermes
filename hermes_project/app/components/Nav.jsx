@@ -70,7 +70,20 @@ export default function Navbar() {
               </span>
               <span className="link-text">Calendar</span>
             </Link>
-            <Link
+
+            <Link href="/users" className="nav-link">
+              <span className="icon">
+                <i className="bi bi-people"></i>
+              </span>
+              <span className="link-text">PNMs</span>
+            </Link>
+            <Link href="/fraternities" className="nav-link">
+              <span className="icon">
+                <i className="bi bi-building"></i>
+              </span>
+              <span className="link-text">Fraternities</span>
+            </Link>
+            {/* <Link
               href={session.active ? "/users" : "/fraternities"}
               className="nav-link"
             >
@@ -80,7 +93,7 @@ export default function Navbar() {
               <span className="link-text">
                 {session.active ? "PNMs" : "Fraternities"}
               </span>
-            </Link>
+            </Link> */}
             <Link href="/chat" className="nav-link">
               <span className="icon">
                 <i className="bi bi-chat-dots"></i>
