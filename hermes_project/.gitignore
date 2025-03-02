@@ -39,3 +39,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+hermes_project/hackcu-452419-firebase-adminsdk-fbsvc-93c42f86ce.json
