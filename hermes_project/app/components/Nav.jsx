@@ -75,7 +75,7 @@ export default function Navbar() {
               <span className="link-text">Calendar</span>
             </Link>
             <Link
-              href={session.active ? "/user_homepage?tab=fraternities" : "/users"}
+              href={session.active ? "/users" : "/fraternities"}
               className="nav-link"
             >
               <span className="icon">
