@@ -87,7 +87,7 @@ export default function Navbar() {
               <span className="link-text">Calendar</span>
             </Link>
 
-            <Link href="/users" className="nav-link">
+            {/* <Link href="/users" className="nav-link">
               <span className="icon">
                 <i className="bi bi-people"></i>
               </span>
@@ -98,9 +98,9 @@ export default function Navbar() {
                 <i className="bi bi-building"></i>
               </span>
               <span className="link-text">Fraternities</span>
-            </Link>
+            </Link> */}
             {/* Conditionally render account link based on active status from account info */}
-          {/* {session && userData && (
+          {session && userData && (
             <Link
               href={userData.active ? "/users" : "/fraternities"}
               className="nav-link"
@@ -116,7 +116,7 @@ export default function Navbar() {
                 {userData.active ? "PNMs" : "Fraternities"}
               </span>
             </Link>
-          )} */}
+          )}
             <Link href="/chat" className="nav-link">
               <span className="icon">
                 <i className="bi bi-chat-dots"></i>
