@@ -93,10 +93,9 @@ export default function UserModal({ user, onClose }) {
               <h2 className="text-2xl font-bold text-center text-black">{user.firstname} {user.lastname}</h2>
   
               <div className="mt-6 space-y-4">
-                <p className="bg-gray-200 p-3 rounded-md text-black"><strong>High School:</strong> Mullen High School</p>
+                <p className="bg-gray-200 p-3 rounded-md text-black"><strong>High School:</strong> {user.highschool} </p>
                 <p className="bg-gray-200 p-3 rounded-md text-black"><strong>Hometown:</strong> {user.hometown_city}, {user.hometown_state}</p>
-                <p className="bg-gray-200 p-3 rounded-md text-black"><strong>GPA:</strong> 3.76</p>
-                <p className="bg-gray-200 p-3 rounded-md text-black"><strong>Bid:</strong> Select</p>
+                <p className="bg-gray-200 p-3 rounded-md text-black"><strong>GPA:</strong> {user.gpa} </p>
               </div>
             </div>
   
