@@ -79,8 +79,9 @@ export default function SignUp() {
         const data = await response.json();
         if (response.ok) {
           alert(data.message);
+          router.push("/user_homepage");
         } else {
-          console.error("Server validation errors:", data.errors);
+          alert(data.errors || data.error);
         }
       };
       
