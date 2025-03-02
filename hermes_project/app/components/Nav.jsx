@@ -25,30 +25,68 @@ export default function Navbar() {
         </div>        
         </Link>
 
-        {/* Desktop Menu */}
-        <div className="nav-links hidden md:flex space-x-6">
-          {/* Always-visible links */}
-          <Link href="/" className="nav-link">Home</Link>
-          <Link href="/about" className="nav-link">About</Link>
-          <Link href="/information" className="nav-link">Information</Link>
+      {/* Desktop Menu */}
+      <div className="nav-links hidden md:flex space-x-6">
+        {/* Always-visible links */}
+        <Link href="/" className="nav-link">
+          <span className="icon">
+            <i className="bi bi-house"></i>
+          </span>
+          <span className="link-text">Home</span>
+        </Link>
+        <Link href="/about" className="nav-link">
+          <span className="icon">
+            <i className="bi bi-info-circle"></i>
+          </span>
+          <span className="link-text">About</span>
+        </Link>
+        <Link href="/information" className="nav-link">
+          <span className="icon">
+            <i className="bi bi-card-text"></i>
+          </span>
+          <span className="link-text">Information</span>
+        </Link>
 
-          {/* If the user is logged in, show the “user” nav items */}
-          {session && (
-            <>
-              <Link href="/user_homepage?tab=events" className="nav-link">Events</Link>
-              <Link href="/user_homepage?tab=explore" className="nav-link">Explore</Link>
-              <Link href="/user_homepage?tab=account" className="nav-link">Account</Link>
-              <Link href="/user_homepage?tab=calendar" className="nav-link">Calendar</Link>
-
-              <Link
-                href={session.active ? "/user_homepage?tab=fraternities" : "/users"}
-                className="nav-link"
-              >
+        {/* If the user is logged in, show the “user” nav items */}
+        {session && (
+          <>
+            <Link href="/user_homepage?tab=events" className="nav-link">
+              <span className="icon">
+                <i className="bi bi-geo-alt"></i>
+              </span>
+              <span className="link-text">Events</span>
+            </Link>
+            <Link href="/user_homepage?tab=explore" className="nav-link">
+              <span className="icon">
+                <i className="bi bi-compass"></i>
+              </span>
+              <span className="link-text">Explore</span>
+            </Link>
+            <Link href="/user_homepage?tab=account" className="nav-link">
+              <span className="icon">
+                <i className="bi bi-person"></i>
+              </span>
+              <span className="link-text">Account</span>
+            </Link>
+            <Link href="/user_homepage?tab=calendar" className="nav-link">
+              <span className="icon">
+                <i className="bi bi-calendar"></i>
+              </span>
+              <span className="link-text">Calendar</span>
+            </Link>
+            <Link
+              href={session.active ? "/user_homepage?tab=fraternities" : "/users"}
+              className="nav-link"
+            >
+              <span className="icon">
+                <i className={session.active ? "bi bi-people" : "bi bi-building"}></i>
+              </span>
+              <span className="link-text">
                 {session.active ? "PNMs" : "Fraternities"}
-              </Link>
-            </>
-          )}
-
+              </span>
+            </Link>
+          </>
+        )}
           {/* Auth Buttons */}
           {session ? (
             <button onClick={() => signOut()} className="sign-out">
