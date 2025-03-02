@@ -1,11 +1,27 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { data: session } = useSession();
+  const [userData, setUserData] = useState(null);
+
+    // Fetch extra account info using the OAuth email
+    useEffect(() => {
+      if (session?.user?.email) {
+        fetch(`http://127.0.0.1:8080/api/findUserData/${session.user.email}`)
+          .then((res) => res.json())
+          .then((data) => {
+            if (!data.error) {
+              setUserData(data);
+            }
+          })
+          .catch((err) => console.error("Error fetching account data:", err));
+      }
+    }, [session]);
+
 
   return (
 
@@ -83,17 +99,24 @@ export default function Navbar() {
               </span>
               <span className="link-text">Fraternities</span>
             </Link>
-            {/* <Link
-              href={session.active ? "/users" : "/fraternities"}
+            {/* Conditionally render account link based on active status from account info */}
+          {/* {session && userData && (
+            <Link
+              href={userData.active ? "/users" : "/fraternities"}
               className="nav-link"
             >
               <span className="icon">
-                <i className={session.active ? "bi bi-people" : "bi bi-building"}></i>
+                <i
+                  className={
+                    userData.active ? "bi bi-people" : "bi bi-building"
+                  }
+                ></i>
               </span>
               <span className="link-text">
-                {session.active ? "PNMs" : "Fraternities"}
+                {userData.active ? "PNMs" : "Fraternities"}
               </span>
-            </Link> */}
+            </Link>
+          )} */}
             <Link href="/chat" className="nav-link">
               <span className="icon">
                 <i className="bi bi-chat-dots"></i>
