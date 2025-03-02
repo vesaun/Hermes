@@ -41,7 +41,7 @@ export default function Navbar() {
                 Register
               </button>
               <button
-                onClick={() => signIn("google", { callbackUrl: "/" })}
+                onClick={() => signIn("google", { callbackUrl: "/user_homepage" })}
                 className="bg-white text-blue-900 px-4 py-2 rounded-lg hover:bg-gray-200 cursor-pointer"
               >
                 Log In
