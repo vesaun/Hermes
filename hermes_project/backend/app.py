@@ -18,6 +18,25 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
+@app.route("/api/getFratData", methods=["GET"])
+def getFratData():
+    frats_ref = db.collection("fraternities")
+    frats = frats_ref.stream()
+
+    frat_data = []
+    for frat in frats:
+        frat_dict = frat.to_dict()
+        frat_data.append({
+            "name": frat_dict.get("name"),
+            "chapter": frat_dict.get("chapter"),
+            "address": frat_dict.get("address"),
+            "year_founded": frat_dict.get("year_founded"),
+            "member_count": frat_dict.get("member_count"),
+            "instagram_username": frat_dict.get("instagram_username")
+        })
+
+    return jsonify(frat_data)
+
 @app.route("/api/getUserData", methods=["GET"])
 def getUserData():
     users_ref = db.collection("users")
