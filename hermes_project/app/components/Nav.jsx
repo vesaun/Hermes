@@ -39,6 +39,13 @@ export default function Navbar() {
               <Link href="/user_homepage?tab=explore" className="nav-link">Explore</Link>
               <Link href="/user_homepage?tab=account" className="nav-link">Account</Link>
               <Link href="/user_homepage?tab=calendar" className="nav-link">Calendar</Link>
+
+              <Link
+                href={session.active ? "/user_homepage?tab=fraternities" : "/users"}
+                className="nav-link"
+              >
+                {session.active ? "PNMs" : "Fraternities"}
+              </Link>
             </>
           )}
 
@@ -87,6 +94,7 @@ export default function Navbar() {
               <Link href="/user_homepage?tab=calendar" onClick={() => setMenuOpen(false)}>
                 Calendar
               </Link>
+
             </>
           )}
 
