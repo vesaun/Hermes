@@ -35,6 +35,27 @@ def getUserData():
 
     return jsonify(user_data)
 
+@app.route("/api/findUserData/<email>", methods=["GET"])
+def getUserData(email):
+    users_ref = db.collection("users")
+    query = users_ref.where("email", "==", email).stream()
+
+    user_data = []
+    for user in query:
+        user_dict = user.to_dict()
+        user_data.append({
+            "firstname": user_dict.get("firstname"),
+            "lastname": user_dict.get("lastname"),
+            "hometown": f"{user_dict.get('hometown_city')}, {user_dict.get('hometown_state')}",
+            "major": user_dict.get("major")
+        })
+
+    if not user_data:
+        return jsonify({"error": "User not found"}), 404
+
+    return jsonify(user_data)
+
+
 def add_user(data):
     existing_user_ref = db.collection("users").where("email", "==", data["email"]).limit(1).get()
 
