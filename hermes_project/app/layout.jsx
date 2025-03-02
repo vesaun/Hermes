@@ -3,7 +3,7 @@ import "./globals.css";
 import SessionProvider from "./components/SessionProvider";
 import Head from "next/head";
 import AOSInitializer from "./aosinit"; // adjust the path as needed
-
+import "bootstrap-icons/font/bootstrap-icons.css"; // or the CDN version
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
