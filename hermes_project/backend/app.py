@@ -19,7 +19,7 @@ CORS(app)
 
 #LOGAN's PATH
 #/Users/logan/OneDrive/Desktop/hackcu/Hermes/hermes_project/hackcu-452419-firebase-adminsdk-fbsvc-93c42f86ce.json
-cred = credentials.Certificate("/Users/vesaunshrestha/Documents/Hermes/hermes_project/hackcu-452419-firebase-adminsdk-fbsvc-93c42f86ce.json")
+cred = credentials.Certificate("/Users/logan/OneDrive/Desktop/hackcu/Hermes/hermes_project/hackcu-452419-firebase-adminsdk-fbsvc-93c42f86ce.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
@@ -90,7 +90,9 @@ def getFratData():
             "address": frat_dict.get("address"),
             "year_founded": frat_dict.get("year_founded"),
             "member_count": frat_dict.get("member_count"),
-            "instagram_username": frat_dict.get("instagram_username")
+            "instagram_username": frat_dict.get("instagram_username"),
+            "logoImage": frat_dict.get("logoImage"),
+            "houseImage": frat_dict.get("houseImage")
         })
 
     return jsonify(frat_data)
@@ -108,7 +110,9 @@ def getUserData():
             "firstname": user_dict.get("firstname"),
             "lastname": user_dict.get("lastname"),
             "hometown": f"{user_dict.get('hometown_city')}, {user_dict.get('hometown_state')}",
-            "major": user_dict.get("major")
+            "major": user_dict.get("major"),
+            "highschool": user_dict.get("highschool"),
+            "gpa": user_dict.get("gpa")
         })
 
     return jsonify(user_data)
