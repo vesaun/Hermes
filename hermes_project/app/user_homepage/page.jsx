@@ -1,8 +1,5 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useState } from "react";
-import { gapi } from "gapi-script";
-import { useSession } from "next-auth/react";
 
 export default function UserHomepage() {
     const [activeTab, setActiveTab] = useState('events');
