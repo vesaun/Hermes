@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Navbar from "./components/Nav"; 
+import Footer from "./components/footer";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 export default function HomePage() {
   const [year, setYear] = useState(null);
@@ -19,23 +21,23 @@ export default function HomePage() {
       <Navbar />
 
       {/* Hero Section */}
-      <header
-  className="relative flex items-center justify-center bg-cover bg-center bg-no-repeat min-h-screen"
-  style={{ backgroundImage: "url('/images/Flatirons_Winter_Sunrise_edit_2.jpg')" }}
->
-  {/* Dark Overlay for Contrast */}
-  <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-
-  {/* Huge & Bold Stretched Welcome Text */}
-  <h1 className="relative z-10 text-white text-8xl font-black tracking-[0.2em] scale-x-125 whitespace-nowrap shadow-[0_0_25px_rgba(255,255,255,1)]">
-    Welcome to Hermes
-  </h1>
+    
+      <header className="hero">
+  <div className="hero-content">
+    <h1 className="hero-title">
+      Welcome to Hermes
+    </h1>
+    <p className="hero-subtitle">
+      Experience the power of seamless communication.
+    </p>
+  </div>
 </header>
 
 
 
+
       {/* Main Content */}
-      <section className="container mx-auto px-6 py-10">
+      <section className="container mx-auto px-6 py-10" data-aos="fade-up" data-aos-delay="100">
         <h3 className="text-3xl font-bold text-center text-blue-900">What is IFC?</h3>
         <p className="text-gray-700 text-lg text-center max-w-3xl mx-auto mt-4">
           The <strong>Interfraternity Council (IFC)</strong> governs and supports fraternities on campus, ensuring strong brotherhood, leadership, and service. Our platform allows fraternities to manage their events and share important updates with their members.
@@ -52,9 +54,8 @@ export default function HomePage() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-blue-900 text-white text-center py-4 mt-10">
-        &copy; {year ? year : "Loading..."} IFC Fraternity Network. All Rights Reserved.
-      </footer>
+      <Footer />
+
     </div>
   );
 }
