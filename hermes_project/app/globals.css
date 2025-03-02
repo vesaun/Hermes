@@ -139,7 +139,7 @@ body {
 /* Hero Section Styles */
 .hero {
   position: relative;
-  background: url('/images/Flatirons_Winter_Sunrise_edit_2.jpg') no-repeat center center;
+  background: url('/flatirons.jpg') no-repeat center center;
   background-size: cover;
   min-height: 100vh;
   display: flex;              /* Center content horizontally */
