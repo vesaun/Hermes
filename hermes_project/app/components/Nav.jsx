@@ -91,20 +91,20 @@ export default function Navbar() {
         )}
           {/* Auth Buttons */}
           {session ? (
-            <button onClick={() => signOut()} className="sign-out">
+            <button onClick={() => signOut()} className="sign-out cursor-pointer">
               Sign Out
             </button>
           ) : (
             <div className="flex gap-4">
               <button
                 onClick={() => signIn("google", { callbackUrl: "/signup" })}
-                className="bg-white text-blue-900 px-4 py-2 rounded-lg hover:bg-gray-200"
+                className="bg-white text-blue-900 px-4 py-2 rounded-lg hover:bg-gray-200 cursor-pointer"
               >
                 Register
               </button>
               <button
                 onClick={() => signIn("google", { callbackUrl: "/user_homepage?tab=events" })}
-                className="bg-white text-blue-900 px-4 py-2 rounded-lg hover:bg-gray-200"
+                className="bg-white text-blue-900 px-4 py-2 rounded-lg hover:bg-gray-200 cursor-pointer"
               >
                 Log In
               </button>

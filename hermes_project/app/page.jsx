@@ -47,7 +47,7 @@ export default function HomePage() {
       {/* Call to Action */}
       <div className="text-center py-10">
         <Link href="/information">
-          <button className="bg-blue-900 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-700 transition">
+          <button className="bg-blue-900 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-700 transition cursor-pointer">
             Learn More About IFC
           </button>
         </Link>
