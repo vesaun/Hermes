@@ -70,7 +70,8 @@
 export default function UserModal({ user, onClose }) {
     return (
       <div className="fixed inset-0 flex items-center justify-center z-50">
-        <div className="bg-white rounded-lg shadow-xl p-8 w-3/4 h-auto relative border">
+        {/* <div className="bg-white rounded-lg shadow-xl p-8 w-3/4 h-auto relative border"> */}
+        <div className="bg-gradient-to-b from-gray-100 to-gray-300 rounded-lg shadow-xl p-10 w-4/5 h-auto relative border">
           {/* Close Button */}
           <button
             onClick={onClose}
@@ -94,7 +95,7 @@ export default function UserModal({ user, onClose }) {
   
               <div className="mt-6 space-y-4">
                 <p className="bg-gray-200 p-3 rounded-md text-black"><strong>High School:</strong> {user.highschool} </p>
-                <p className="bg-gray-200 p-3 rounded-md text-black"><strong>Hometown:</strong> {user.hometown_city}, {user.hometown_state}</p>
+                <p className="bg-gray-200 p-3 rounded-md text-black"><strong>Hometown:</strong> {user.hometown}</p>
                 <p className="bg-gray-200 p-3 rounded-md text-black"><strong>GPA:</strong> {user.gpa} </p>
               </div>
             </div>
