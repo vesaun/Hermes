@@ -1,5 +1,6 @@
 "use client";
 import Navbar from "../components/Nav";
+import Footer from "../components/footer";
 
 export default function AboutPage() {
   return (
@@ -8,7 +9,7 @@ export default function AboutPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <header className="text-center py-20 bg-blue-800 text-white">
+      <header className="text-center py-20 bg-blue-800 text-white" data-aos="fade-up" data-aos-delay="200">
         <h1 className="text-5xl font-bold">About IFC</h1>
         <p className="text-lg mt-4 max-w-2xl mx-auto">
           The Interfraternity Council (IFC) is dedicated to promoting leadership, brotherhood, and service within the Greek community.
@@ -16,7 +17,7 @@ export default function AboutPage() {
       </header>
 
       {/* Main Content Section */}
-      <section className="container mx-auto px-6 py-12">
+      <section className="container mx-auto px-6 py-12" data-aos="fade-up">
         <h2 className="text-3xl font-bold text-blue-900 text-center">Our Mission</h2>
         <p className="text-gray-700 text-lg text-center max-w-3xl mx-auto mt-4">
           IFC serves as the governing body for fraternities, ensuring they operate with integrity, community service, and a commitment to academic excellence. We provide resources and a structured environment for fraternities to thrive.
@@ -24,23 +25,23 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="bg-blue-100 py-12">
+      <section className="bg-blue-100 py-12" data-aos="fade-up">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold text-blue-900">Core Values</h2>
           <div className="mt-8 flex flex-col md:flex-row gap-6 justify-center">
-            <div className="bg-white shadow-md rounded-lg p-6 max-w-sm">
+            <div className="bg-white shadow-md rounded-lg p-6 max-w-sm" data-aos="fade-left">
               <h3 className="text-xl font-bold text-blue-900">Brotherhood</h3>
               <p className="text-gray-700 mt-2">
                 Building lifelong friendships and fostering unity among fraternity members.
               </p>
             </div>
-            <div className="bg-white shadow-md rounded-lg p-6 max-w-sm">
+            <div className="bg-white shadow-md rounded-lg p-6 max-w-sm" data-aos="fade-up">
               <h3 className="text-xl font-bold text-blue-900">Leadership</h3>
               <p className="text-gray-700 mt-2">
                 Encouraging leadership roles and developing future professionals.
               </p>
             </div>
-            <div className="bg-white shadow-md rounded-lg p-6 max-w-sm">
+            <div className="bg-white shadow-md rounded-lg p-6 max-w-sm"data-aos="fade-right">
               <h3 className="text-xl font-bold text-blue-900">Service</h3>
               <p className="text-gray-700 mt-2">
                 Giving back to the community through philanthropy and volunteer work.
@@ -51,7 +52,7 @@ export default function AboutPage() {
       </section>
 
       {/* Contact & Get Involved */}
-      <section className="container mx-auto px-6 py-12 text-center">
+      <section className="container mx-auto px-6 py-12 text-center" data-aos="fade-up">
         <h2 className="text-3xl font-bold text-blue-900">Get Involved</h2>
         <p className="text-gray-700 text-lg mt-4 max-w-3xl mx-auto">
           Whether you’re a prospective member, current student, or alumni, there are many ways to support and engage with IFC.
@@ -64,9 +65,7 @@ export default function AboutPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-blue-900 text-white text-center py-4 mt-10">
-        &copy; {new Date().getFullYear()} IFC Fraternity Network. All Rights Reserved.
-      </footer>
+      <Footer />
     </div>
   );
 }
