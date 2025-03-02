@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useState } from "react";
+import { gapi } from "gapi-script";
 import { useSession } from "next-auth/react";
 
 export default function UserHomepage() {
@@ -183,57 +184,4 @@ function ExploreFraternitiesTab() {
             <p>Manage your profile and preferences.</p>
         </div>
     );
-}*/
-function AccountInformationTab() {
-    const { data: session, status } = useSession();
-  
-    if (status === "loading") {
-      return <p>Loading session...</p>;
-    }
-  
-    if (!session) {
-      return <p>You are not signed in.</p>;
-    }
-  
-    return (
-      <div className="text-blue-200">
-        <h2 className="text-4xl font-bold mb-6">Account Settings</h2>
-        <p>Welcome, {session.user.name}!</p>
-        <p>Your email is: {session.user.email}</p>
-        {/* You can add more account-related info here */}
-      </div>
-    );
-  }
-
-        function Calendar() {
-            const { data: session, status } = useSession();
-          
-            if (status === "loading") {
-              return <p>Loading session...</p>;
-            }
-          
-            if (!session) {
-              return <p>You are not signed in.</p>;
-            }
-          
-            // Retrieve the user's local timezone from the browser
-            const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-          
-            // Build the embed URL using the user's email and timezone
-            const calendarUrl = `https://calendar.google.com/calendar/embed?src=${encodeURIComponent(
-              session.user.email
-            )}&ctz=${encodeURIComponent(userTimeZone)}`;
-          
-            return (
-              <iframe
-                src={calendarUrl}
-                style={{ border: 0, width: "100%", height: "600px" }}
-                frameBorder="0"
-                scrolling="no"
-                title="Google Calendar"
-              />
-            );
-          }
-
-
-//export default Calendar;
+}
