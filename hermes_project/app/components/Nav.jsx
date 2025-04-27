@@ -52,7 +52,7 @@ export default function Navbar() {
           </span>
           <span className="link-text">Home</span>
         </Link>
-        <Link href="/about" className="nav-link">
+        {/* <Link href="/about" className="nav-link">
           <span className="icon">
             <i className="bi bi-info-circle"></i>
           </span>
@@ -63,23 +63,17 @@ export default function Navbar() {
             <i className="bi bi-card-text"></i>
           </span>
           <span className="link-text">Information</span>
-        </Link>
+        </Link> */}
 
         {/* If the user is logged in, show the “user” nav items */}
         {session && (
           <>
-            <Link href="/user_homepage?tab=events" className="nav-link">
+            {/* <Link href="/user_homepage?tab=events" className="nav-link">
               <span className="icon">
                 <i className="bi bi-geo-alt"></i>
               </span>
               <span className="link-text">Events</span>
-            </Link>
-            <Link href="/user_homepage?tab=account" className="nav-link">
-              <span className="icon">
-                <i className="bi bi-person"></i>
-              </span>
-              <span className="link-text">Account</span>
-            </Link>
+            </Link> */}
             <Link href="/user_homepage?tab=calendar" className="nav-link">
               <span className="icon">
                 <i className="bi bi-calendar"></i>
@@ -87,18 +81,24 @@ export default function Navbar() {
               <span className="link-text">Calendar</span>
             </Link>
 
-            {/* <Link href="/users" className="nav-link">
+            <Link href="/users" className="nav-link">
               <span className="icon">
                 <i className="bi bi-people"></i>
               </span>
               <span className="link-text">PNMs</span>
             </Link>
-            <Link href="/fraternities" className="nav-link">
+            {/* <Link href="/fraternities" className="nav-link">
               <span className="icon">
                 <i className="bi bi-building"></i>
               </span>
               <span className="link-text">Fraternities</span>
             </Link> */}
+            <Link href="/user_homepage?tab=account" className="nav-link">
+              <span className="icon">
+                <i className="bi bi-person"></i>
+              </span>
+              <span className="link-text">Account</span>
+            </Link>
             {/* Conditionally render account link based on active status from account info */}
           {session && userData && (
             <Link
@@ -117,12 +117,12 @@ export default function Navbar() {
               </span>
             </Link>
           )}
-            <Link href="/chat" className="nav-link">
+            {/* <Link href="/chat" className="nav-link">
               <span className="icon">
                 <i className="bi bi-chat-dots"></i>
               </span>
               <span className="link-text">Chat</span>
-            </Link>
+            </Link> */}
           </>
         )}
           {/* Auth Buttons */}
