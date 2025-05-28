@@ -51,6 +51,19 @@ export default function FraternityModal({ frat, onClose }) {
                   </a>
                 </p>
               </div>
+              {/* About Section */}
+              <div className="bg-gray-100 p-6 rounded-lg mt-6 text-black">
+                <h3 className="text-2xl font-bold mb-2">Core Values</h3>
+                <p className="bg-gray-300 p-4 rounded-md">
+                  {frat.values }
+                </p>
+              </div>
+              <div className="bg-gray-100 p-6 rounded-lg mt-6 text-black">
+                <h3 className="text-2xl font-bold mb-2">About</h3>
+                <p className="bg-gray-300 p-4 rounded-md">
+                  {frat.about }
+                </p>
+              </div>
             </div>
           </div>
         </div>
